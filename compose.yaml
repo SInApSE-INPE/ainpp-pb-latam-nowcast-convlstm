@@ -1,0 +1,11 @@
+services:
+  convlstm:
+    build: .
+    image: convlstm-nowcast:local
+    restart: unless-stopped
+    stop_grace_period: 20m
+    user: "${CONVLSTM_UID:?Set CONVLSTM_UID to your host user ID}:${CONVLSTM_GID:?Set CONVLSTM_GID to your host group ID}"
+    env_file: .env
+    volumes:
+      - ./artifacts/v1:/app/artifacts/v1
+      - ./outputs:/app/outputs
